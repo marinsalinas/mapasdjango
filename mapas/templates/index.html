@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Aplicacion de Django con Gmaps{% endblock%}
+	{% block container %}
+		<div id="mapa" class="capas"></div>
+		<div id="datos" class="capas">
+			<div id="form">
+				<form  id="form_coords" action="/coords/save" method="post">{% csrf_token %}
+					{{ form.as_p }}
+					<p>
+						<input type="submit" value="Guardar ubicación"></input>
+					</p>
+				</form>
+			</div>
+			<div id="data">
+				<ul id="ubicaciones">
+					{%for ubicacion in ubicaciones%}
+						<li>{{ ubicacion.nombre }} {{ ubicacion.user }} - hace {{ ubicacion.fecha|timesince }}</li>
+					{% endfor %}
+				</ul>	
+			</div>
+		</div>
+		
+	{% endblock %}
